@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Selectas & MCs :: RGF{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb"><a href="{{ path('app_home') }}">RGF</a> » Selectas & MCs</div>
+    <div class="titre-page">La crew</div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <p><a class="btn" href="{{ path('app_artist_new') }}">+ Nouveau membre</a></p>
+    {% endif %}
+
+    <table class="forumline">
+        <tr>
+            <th colspan="2">Nom</th><th width="180">Rôle</th><th width="240">Style</th>
+            {% if is_granted('ROLE_ADMIN') %}<th width="170" class="center">Actions</th>{% endif %}
+        </tr>
+        {% for artist in artists %}
+            <tr>
+                <td class="folder"></td>
+                <td><b>{{ artist.name }}</b></td>
+                <td class="small">{{ artist.role }}</td>
+                <td class="small">{{ artist.style }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td class="center">
+                        <a href="{{ path('app_artist_edit', {id: artist.id}) }}">éditer</a>
+                        <form method="post" action="{{ path('app_artist_delete', {id: artist.id}) }}" style="display:inline" onsubmit="return confirm('Supprimer ce membre ?')">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_artist_' ~ artist.id) }}">
+                            <button type="submit" class="btn-rouge">suppr</button>
+                        </form>
+                    </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr><td colspan="5" class="center">Personne dans la crew...</td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

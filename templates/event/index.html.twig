@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dates & Sessions :: RGF{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb"><a href="{{ path('app_home') }}">RGF</a> » Dates & Sessions</div>
+    <div class="titre-page">Les prochaines danses</div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <p><a class="btn" href="{{ path('app_event_new') }}">+ Nouveau sujet</a></p>
+    {% endif %}
+
+    <table class="forumline">
+        <tr>
+            <th colspan="2">Session</th>
+            <th width="140">Date</th>
+            <th width="180">Lieu</th>
+            <th width="130" class="center">Actions</th>
+        </tr>
+        {% for event in events %}
+            <tr>
+                <td class="folder"></td>
+                <td><a href="{{ path('app_event_show', {id: event.id}) }}">{{ event.title }}</a><br>
+                    <span class="small">{{ event.description|slice(0, 120) }}...</span></td>
+                <td class="small">{{ event.date|date('d/m/Y H:i') }}</td>
+                <td class="small">{{ event.place }}</td>
+                <td class="center">
+                    <a href="{{ path('app_event_show', {id: event.id}) }}">voir</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        | <a href="{{ path('app_event_edit', {id: event.id}) }}">éditer</a>
+                        <form method="post" action="{{ path('app_event_delete', {id: event.id}) }}" style="display:inline" onsubmit="return confirm('Supprimer cette session ?')">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_event_' ~ event.id) }}">
+                            <button type="submit" class="btn-rouge">suppr</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="5" class="center">Aucune date pour l'instant... <span class="blink">stay tuned !</span></td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

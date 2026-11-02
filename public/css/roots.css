@@ -1,0 +1,287 @@
+/* =========================================================
+   ROOTS GUINGETTE FREESTYLE - feuille de style officielle
+   Noir / Rouge / Jaune / Vert - esprit vieux forum sound system
+   ========================================================= */
+
+:root {
+  --rouge: #e0112b;
+  --rouge-fonce: #5a0610;
+  --or: #ffd800;
+  --vert: #00a83a;
+  --vert-clair: #5dff2e;
+  --vert-fonce: #0a3d14;
+  --fond: #000;
+  --panneau: #0d0d0d;
+  --row1: #1c1c1c;
+  --row2: #121212;
+  --bord: #6b5a00;
+  --texte: #f2f2f2;
+  --texte-doux: #b5b5b5;
+  --lien: #ffd800;
+  --lien-hover: #5dff2e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 12px 0 40px;
+  color: var(--texte);
+  font-family: Verdana, Tahoma, "Trebuchet MS", sans-serif;
+  font-size: 11px;
+  background-color: var(--fond);
+  /* fond GIF animé en mosaïque, façon GeoCities (chemin relatif au CSS) */
+  background-image: url("../images/fond-rasta.gif");
+  background-repeat: repeat;
+}
+
+a { color: var(--lien); text-decoration: none; font-weight: bold; }
+a:hover { color: var(--lien-hover); text-decoration: underline; }
+
+/* ---------- conteneur principal : large ---------- */
+.wrap {
+  width: 96%;
+  max-width: 1500px;
+  margin: 0 auto;
+  background: var(--panneau);
+  border: 4px outset #8a7400;
+  box-shadow: 6px 6px 0 #000;
+}
+
+.rasta {
+  height: 12px;
+  background: linear-gradient(var(--rouge) 33%, var(--or) 33% 66%, var(--vert) 66%);
+}
+
+/* ---------- bannière ---------- */
+.banner {
+  padding: 18px 10px 12px;
+  text-align: center;
+  background:
+    repeating-linear-gradient(45deg, #000 0 12px, #1a0508 12px 24px);
+  border-bottom: 3px solid #000;
+}
+.banner h1 {
+  margin: 0;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 64px;
+  letter-spacing: 3px;
+  color: var(--or);
+  text-transform: uppercase;
+  /* effet WordArt */
+  text-shadow: 3px 3px 0 var(--rouge), 6px 6px 0 var(--vert), 9px 9px 0 #000;
+}
+.banner .slogan {
+  margin-top: 8px;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: 16px;
+  color: var(--vert-clair);
+  text-shadow: 1px 1px 0 #000;
+}
+
+/* ---------- marquee ---------- */
+.ticker {
+  background: #000;
+  color: var(--or);
+  border-top: 2px solid var(--rouge);
+  border-bottom: 2px solid var(--vert);
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 0;
+}
+
+/* ---------- menu boutons 3D ---------- */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px;
+  background: #1a1a1a;
+  border-bottom: 3px solid #000;
+}
+.nav a, .btn, button, input[type=submit] {
+  display: inline-block;
+  padding: 4px 12px;
+  font: bold 11px Verdana, sans-serif;
+  text-transform: uppercase;
+  color: #000;
+  background: linear-gradient(#fff7a0, #e0b800);
+  border: 3px outset #ffe96b;
+  cursor: pointer;
+  text-decoration: none;
+}
+.nav a:hover, .btn:hover, button:hover, input[type=submit]:hover {
+  color: #000;
+  background: linear-gradient(#b8ff9a, #1f9c1a);
+  border-color: #8be86b;
+  text-decoration: none;
+}
+.nav a:active, .btn:active, button:active { border-style: inset; }
+.nav .admin, .btn-rouge { background: linear-gradient(#ff9a9a, var(--rouge)); border-color: #ff7070; color: #fff; }
+.nav .admin:hover { color: #000; }
+
+/* ---------- layout 2 colonnes ---------- */
+.layout { display: flex; gap: 8px; padding: 8px; align-items: flex-start; }
+.sidebar { width: 220px; flex-shrink: 0; }
+.main { flex: 1; min-width: 0; }
+
+/* ---------- boites façon forum ---------- */
+.box {
+  margin-bottom: 8px;
+  border: 2px solid #000;
+  outline: 1px solid var(--bord);
+  background: var(--row2);
+}
+.box-title, table.forumline th, .cat {
+  padding: 4px 6px;
+  font-weight: bold;
+  font-size: 11px;
+  color: #fff;
+  text-align: left;
+  background: linear-gradient(#18c24f, #064d18);
+  border-bottom: 2px solid #000;
+  text-shadow: 1px 1px 0 #000;
+}
+.box-body { padding: 6px; line-height: 1.5; }
+.box-body ul { margin: 0; padding-left: 18px; list-style: square; }
+
+/* ---------- tableaux forum ---------- */
+table.forumline {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 2px;
+  background: #000;
+  margin-bottom: 8px;
+  border: 1px solid var(--bord);
+}
+table.forumline td { padding: 6px; vertical-align: middle; }
+table.forumline tr:nth-child(odd) td  { background: var(--row1); }
+table.forumline tr:nth-child(even) td { background: var(--row2); }
+table.forumline td.cat {
+  background: linear-gradient(#e0112b, #4a040c) !important;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+table.forumline .center { text-align: center; }
+table.forumline .small { font-size: 11px; color: var(--texte-doux); }
+
+/* pastille "dossier" dessinée en CSS (remplace les emojis) */
+.folder { width: 40px; text-align: center; }
+.folder::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 14px;
+  background: linear-gradient(var(--or) 50%, var(--rouge) 50%);
+  border: 2px outset var(--vert);
+  vertical-align: middle;
+}
+tr:nth-child(3n+1) > .folder::before { background: linear-gradient(var(--vert) 50%, var(--or) 50%); border-color: var(--rouge); }
+tr:nth-child(3n+2) > .folder::before { background: linear-gradient(var(--rouge) 50%, var(--vert) 50%); border-color: var(--or); }
+
+/* ---------- textes & gadgets ---------- */
+.titre-page {
+  font-family: "Comic Sans MS", cursive;
+  font-size: 24px;
+  color: var(--or);
+  margin: 4px 0 8px;
+  text-shadow: 2px 2px 0 var(--rouge), 4px 4px 0 #000;
+}
+.breadcrumb { font-size: 10px; margin-bottom: 6px; }
+.small { font-size: 11px; color: var(--texte-doux); }
+
+.blink { animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { visibility: hidden; } }
+
+.new {
+  display: inline-block;
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+  background: var(--rouge);
+  border: 1px solid #ff9090;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+.arc-en-ciel {
+  font-weight: bold;
+  background: linear-gradient(90deg, var(--rouge), var(--or), var(--vert), var(--or), var(--rouge));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: defile 3s linear infinite;
+}
+@keyframes defile { to { background-position: 200% center; } }
+
+.compteur {
+  display: inline-block;
+  padding: 3px 6px;
+  font: bold 16px "Courier New", monospace;
+  letter-spacing: 4px;
+  color: var(--vert-clair);
+  background: #000;
+  border: 2px inset #555;
+}
+
+.badge88x31 {
+  display: inline-block;
+  width: 88px;
+  height: 31px;
+  margin: 2px;
+  font: bold 9px/29px Verdana, sans-serif;
+  text-align: center;
+  color: #000;
+  border: 1px solid #000;
+  vertical-align: middle;
+}
+
+/* ---------- formulaires ---------- */
+input[type=text], input[type=email], input[type=password], input[type=date],
+input[type=url], input[type=number], select, textarea {
+  width: 100%;
+  padding: 3px;
+  font: 11px Verdana, sans-serif;
+  color: #000;
+  background: #fffbd0;
+  border: 2px inset #999;
+}
+label { font-weight: bold; display: block; margin: 6px 0 2px; }
+form div { margin-bottom: 4px; }
+form ul { margin: 2px 0; padding-left: 16px; color: #ff8a8a; font-weight: bold; }
+
+/* ---------- flash messages ---------- */
+.flash {
+  margin-bottom: 8px;
+  padding: 6px;
+  border: 2px dashed;
+  font-weight: bold;
+}
+.flash-success { border-color: var(--vert); color: var(--vert-clair); background: #04200c; }
+.flash-error   { border-color: var(--rouge); color: #ff8a8a; background: #2a0508; }
+
+/* ---------- footer ---------- */
+.footer {
+  padding: 10px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--texte-doux);
+  background: #000;
+  border-top: 3px solid #000;
+  line-height: 1.8;
+}
+
+/* ---------- admin ---------- */
+.admin-panel .box-title, .admin-panel table.forumline th {
+  background: linear-gradient(#ff4a5e, #5a0610);
+}
+code.api {
+  display: inline-block;
+  padding: 1px 6px;
+  font: 11px "Courier New", monospace;
+  color: var(--vert-clair);
+  background: #000;
+  border: 1px solid #333;
+}

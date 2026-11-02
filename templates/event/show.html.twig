@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ event.title }} :: RGF{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb">
+        <a href="{{ path('app_home') }}">RGF</a> » <a href="{{ path('app_event_index') }}">Dates & Sessions</a> » {{ event.title }}
+    </div>
+
+    <table class="forumline">
+        <tr><th width="200">Auteur</th><th>{{ event.title }}</th></tr>
+        <tr>
+            <td valign="top">
+                <b>Operator</b><br>
+                <span class="small">Sound System RGF<br>Messages : 9999</span>
+            </td>
+            <td>
+                <span class="small">{{ event.date|date('d/m/Y à H:i') }} &bull; {{ event.place }}</span>
+                <hr style="border:0;border-top:1px dashed #6b5a00">
+                {{ event.description }}
+            </td>
+        </tr>
+    </table>
+
+    <a class="btn" href="{{ path('app_event_index') }}">« Retour</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn" href="{{ path('app_event_edit', {id: event.id}) }}">Éditer</a>
+        <form method="post" action="{{ path('app_event_delete', {id: event.id}) }}" style="display:inline" onsubmit="return confirm('Supprimer cette session ?')">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete_event_' ~ event.id) }}">
+            <button type="submit" class="btn-rouge">Supprimer</button>
+        </form>
+    {% endif %}
+{% endblock %}

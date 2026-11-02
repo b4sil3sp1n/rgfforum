@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mixes & Dubplates :: RGF{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb"><a href="{{ path('app_home') }}">RGF</a> » Mixes & Dubplates</div>
+    <div class="titre-page">Mixes & Dubplates</div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <p><a class="btn" href="{{ path('app_mix_new') }}">+ Nouveau mix</a></p>
+    {% endif %}
+
+    <table class="forumline">
+        <tr>
+            <th colspan="2">Mix</th><th width="200">Par</th><th width="90">Durée</th><th width="100" class="center">Écouter</th>
+            {% if is_granted('ROLE_ADMIN') %}<th width="170" class="center">Actions</th>{% endif %}
+        </tr>
+        {% for mix in mixes %}
+            <tr>
+                <td class="folder"></td>
+                <td><b>{{ mix.title }}</b></td>
+                <td class="small">{{ mix.artist }}</td>
+                <td class="small">{{ mix.duration }}</td>
+                <td class="center">{% if mix.url %}<a href="{{ mix.url }}">» play</a>{% else %}-{% endif %}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td class="center">
+                        <a href="{{ path('app_mix_edit', {id: mix.id}) }}">éditer</a>
+                        <form method="post" action="{{ path('app_mix_delete', {id: mix.id}) }}" style="display:inline" onsubmit="return confirm('Supprimer ce mix ?')">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_mix_' ~ mix.id) }}">
+                            <button type="submit" class="btn-rouge">suppr</button>
+                        </form>
+                    </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr><td colspan="6" class="center">Pas encore de mix...</td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

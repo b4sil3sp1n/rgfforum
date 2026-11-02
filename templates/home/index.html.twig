@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="breadcrumb"><a href="{{ path('app_home') }}">RGF</a> » Index du forum</div>
+
+    <table class="forumline">
+        <tr>
+            <th colspan="2">Forum</th>
+            <th class="center" width="80">Sujets</th>
+            <th width="240">Dernier message</th>
+        </tr>
+        <tr><td class="cat" colspan="4">.: Le Sound System :.</td></tr>
+        <tr>
+            <td class="folder"></td>
+            <td><a href="{{ path('app_event_index') }}">Dates & Sessions</a><br>
+                <span class="small">Toutes les prochaines danses du RGF, guinguettes, free parties & co.</span></td>
+            <td class="center">{{ nbEvents|default(0) }}</td>
+            <td class="small">{{ lastEvent ? lastEvent.title : '-' }}</td>
+        </tr>
+        <tr>
+            <td class="folder"></td>
+            <td><a href="{{ path('app_artist_index') }}">Selectas & MCs</a><br>
+                <span class="small">La crew, les invités, les toasters.</span></td>
+            <td class="center">{{ nbArtists|default(0) }}</td>
+            <td class="small">-</td>
+        </tr>
+        <tr>
+            <td class="folder"></td>
+            <td><a href="{{ path('app_mix_index') }}">Mixes & Dubplates</a> <span class="new">NEW</span><br>
+                <span class="small">Roots, dub, steppa, jungle, electro... toujours roots.</span></td>
+            <td class="center">{{ nbMixes|default(0) }}</td>
+            <td class="small">-</td>
+        </tr>
+        <tr><td class="cat" colspan="4">Le Forum</td></tr>
+        <tr>
+            <td class="folder"></td>
+            <td><b>Discussions</b><br>
+                <span class="small">Le forum n'est pas encore ouvert, stay tuned.</span></td>
+            <td class="center">0</td>
+            <td class="small">-</td>
+        </tr>
+    </table>
+
+    <div class="box">
+        <div class="box-title">» Qui est en ligne ?</div>
+        <div class="box-body small">
+            Il y a en tout <b>1</b> utilisateur en ligne :: 0 enregistré, 0 caché et 1 invité.<br>
+            Le record d'utilisateurs en ligne est de <b>42</b> le Sam 12 Juin 2004.
+        </div>
+    </div>
+{% endblock %}

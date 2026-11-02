@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Roots Guingette Freestyle :: Le Forum du Sound{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/roots.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<div class="wrap">
+    <div class="rasta"></div>
+
+    {# ===== BANNIERE ===== #}
+    <div class="banner">
+        <h1>Roots Guingette Freestyle</h1>
+        <div class="slogan">~*~ Sound System Roots &bull; Dub &bull; Jungle &bull; Electro &bull; Freestyle ~*~</div>
+    </div>
+
+    <div class="ticker">
+        <marquee scrollamount="4">
+            ★ BIENVENUE SUR LE SITE OFFICIEL DU RGF ★ Prochaine session : check la rubrique Dates ★
+            Big up à tous les selecta & operators ★ One Love ★ Pas de MP3 pirates svp ★
+        </marquee>
+    </div>
+
+    {# ===== MENU ===== #}
+    <div class="nav">
+        <a href="{{ path('app_home') }}">Accueil</a>
+        <a href="{{ path('app_event_index') }}">Dates</a>
+        <a href="{{ path('app_artist_index') }}">Selectas</a>
+        <a href="{{ path('app_mix_index') }}">Mixes</a>
+        {% if app.user %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="admin" href="{{ path('app_admin') }}">Admin</a>
+            {% endif %}
+            <a href="{{ path('app_logout') }}">Déconnexion ({{ app.user.userIdentifier }})</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Connexion</a>
+        {% endif %}
+    </div>
+
+    <div class="layout">
+        {# ===== COLONNE GAUCHE ===== #}
+        <div class="sidebar">
+            {% block sidebar %}
+                <div class="box">
+                    <div class="box-title">» Le Sound</div>
+                    <div class="box-body">
+                        <ul>
+                            <li><a href="{{ path('app_home') }}">Qui on est</a></li>
+                            <li><a href="{{ path('app_event_index') }}">Agenda</a></li>
+                            <li><a href="{{ path('app_artist_index') }}">La crew</a></li>
+                            <li><a href="{{ path('app_mix_index') }}">Écouter</a> <span class="new">NEW</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-title">» Membre</div>
+                    <div class="box-body">
+                        {% if app.user %}
+                            Yo <b>{{ app.user.userIdentifier }}</b> !<br>
+                            <span class="small">Rôle : {{ is_granted('ROLE_ADMIN') ? 'Operator' : 'Raggamuffin' }}</span>
+                        {% else %}
+                            Tu n'es pas connecté.<br><br>
+                            <a class="btn" href="{{ path('app_login') }}">Se connecter</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-title">» Compteur</div>
+                    <div class="box-body" style="text-align:center">
+                        Visiteurs :<br>
+                        <span class="compteur">004237</span>
+                    </div>
+                </div>
+
+                <div style="text-align:center">
+                    <span class="badge88x31" style="background:#ffd800">BEST VIEWED IE6</span>
+                    <span class="badge88x31" style="background:#5dff2e">100% ROOTS</span>
+                    <span class="badge88x31" style="background:#e0112b;color:#fff">NO BABYLON</span>
+                </div>
+            {% endblock %}
+        </div>
+
+        {# ===== CONTENU ===== #}
+        <div class="main">
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash flash-{{ type }}">» {{ message }}</div>
+                {% endfor %}
+            {% endfor %}
+
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+
+    {# ===== FOOTER ===== #}
+    <div class="footer">
+        Roots Guingette Freestyle &copy; 2004-{{ "now"|date("Y") }} &bull; Propulsé par Symfony &bull;
+        Meilleure résolution 1024x768<br>
+        <span class="arc-en-ciel">Jah Bless ~ One Love ~ Keep it Roots</span>
+    </div>
+    <div class="rasta"></div>
+</div>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

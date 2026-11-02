@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panneau d'administration :: RGF{% endblock %}
+
+{% block body %}
+<div class="admin-panel">
+    <div class="breadcrumb"><a href="{{ path('app_home') }}">RGF</a> » Administration</div>
+    <div class="titre-page">Panneau d'administration</div>
+
+    <div class="box">
+        <div class="box-title">» Statistiques du sound</div>
+        <div class="box-body">
+            Sessions : <b>{{ nbEvents|default(0) }}</b> &bull;
+            Selectas : <b>{{ nbArtists|default(0) }}</b> &bull;
+            Mixes : <b>{{ nbMixes|default(0) }}</b> &bull;
+            Membres : <b>{{ nbUsers|default(0) }}</b>
+        </div>
+    </div>
+
+    <table class="forumline">
+        <tr><th>Gestion</th><th width="280">API JSON</th></tr>
+        <tr>
+            <td><a href="{{ path('app_event_index') }}">Gérer les sessions</a> | <a href="{{ path('app_event_new') }}">+ nouvelle</a></td>
+            <td><code class="api">GET /admin/api/events</code></td>
+        </tr>
+        <tr>
+            <td><a href="{{ path('app_artist_index') }}">Gérer les selectas</a> | <a href="{{ path('app_artist_new') }}">+ nouveau</a></td>
+            <td><code class="api">GET /admin/api/artists</code></td>
+        </tr>
+        <tr>
+            <td><a href="{{ path('app_mix_index') }}">Gérer les mixes</a> | <a href="{{ path('app_mix_new') }}">+ nouveau</a></td>
+            <td><code class="api">GET /admin/api/mixes</code></td>
+        </tr>
+        <tr>
+            <td>Membres</td>
+            <td><code class="api">GET /admin/api/users</code></td>
+        </tr>
+    </table>
+
+    <div class="flash flash-error">Zone réservée aux operators (ROLE_ADMIN). Big up la sécu.</div>
+</div>
+{% endblock %}

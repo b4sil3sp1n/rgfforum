@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ titre }} :: RGF{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb"><a href="{{ path('app_home') }}">RGF</a> » {{ rubrique }} » {{ titre }}</div>
+    <div class="titre-page">{{ titre }}</div>
+
+    <table class="forumline">
+        <tr><th>{{ titre }}</th></tr>
+        <tr>
+            <td>
+                {{ form(form) }}
+                <p><a class="btn" href="{{ retour }}">« Annuler</a></p>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion :: RGF{% endblock %}
+
+{% block body %}
+    <div class="breadcrumb"><a href="{{ path('app_home') }}">RGF</a> » Connexion</div>
+
+    <table class="forumline" style="max-width:520px;margin:20px auto">
+        <tr><th>Entrez votre nom d'utilisateur et votre mot de passe</th></tr>
+        <tr>
+            <td>
+                {% if error %}
+                    <div class="flash flash-error">» {{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <form method="post">
+                    <label for="username">Email :</label>
+                    <input type="email" id="username" name="email" value="{{ last_username }}" required autofocus>
+
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <p class="small"><input type="checkbox" name="_remember_me"> Me connecter automatiquement à chaque visite</p>
+                    <p style="text-align:center"><input type="submit" value="Connexion"></p>
+                </form>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
